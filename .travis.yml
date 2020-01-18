@@ -3,10 +3,10 @@ services:
     - docker
 
 before_install:
-    -docker build -t kris/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t kris/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run kris/react-test npm test -- --coverage
+    - docker run -e CI=true USERNAME/react-test npm test
 
 after_succes:
     - docker build -t kris/multi-client ./client
