@@ -1,19 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: client-deployment
+  name: client-cluster-ip-service
 spec:
-  replicas: 3
+  type: ClusterIP
   selector:
-    matchLabels:
-      component: web
-  template:
-    metadata:
-      labels:
-        component: web
-    spec:
-      containers:
-        - name: client
-          image: stephengrider/multi-client
-          ports:
-            - containerPort: 3000
+    component: web
+  ports:
+    - port: 3000
+      targetPort: 3000
